@@ -3001,6 +3001,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["server", "workspace:packages/server"],\
             ["@types/cors", "npm:2.8.13"],\
             ["@types/express", "npm:4.17.17"],\
+            ["@types/node", "npm:18.13.0"],\
             ["cors", "npm:2.8.5"],\
             ["dotenv", "npm:16.0.3"],\
             ["express", "npm:4.18.2"],\
@@ -3255,7 +3256,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.3"],\
-            ["@types/node", null],\
+            ["@types/node", "npm:18.13.0"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
