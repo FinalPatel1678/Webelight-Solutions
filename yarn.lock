@@ -3607,7 +3607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.10":
+"@types/react-dom@npm:latest":
   version: 18.0.10
   resolution: "@types/react-dom@npm:18.0.10"
   dependencies:
@@ -3616,7 +3616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.27":
+"@types/react@npm:*, @types/react@npm:latest":
   version: 18.0.27
   resolution: "@types/react@npm:18.0.27"
   dependencies:
@@ -7125,8 +7125,9 @@ __metadata:
   resolution: "frontend@workspace:packages/frontend"
   dependencies:
     "@types/node": ^16.18.12
-    "@types/react": ^18.0.27
-    "@types/react-dom": ^18.0.10
+    "@types/react": latest
+    "@types/react-dom": latest
+    eslint-config-react-app: ^7.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.1
