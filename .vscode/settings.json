@@ -3,5 +3,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "npm.packageManager": "yarn"
+  "npm.packageManager": "yarn",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

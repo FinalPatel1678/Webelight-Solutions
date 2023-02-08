@@ -12,5 +12,8 @@
   },
   "engines": {
     "node": "v19.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }
