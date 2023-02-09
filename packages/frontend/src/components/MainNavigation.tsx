@@ -5,7 +5,7 @@ import { FileNotFound } from "../views/FileNotFound";
 import { RoutePaths } from "../util/enum";
 
 // component lazy loading
-const Products = lazy(() => import("../views/Products/Products"));
+const Products = lazy(() => import("../views/Products"));
 
 export const MainNavigation: React.FC<{}> = () => {
   return (
