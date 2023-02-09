@@ -1,4 +1,4 @@
-import { Grid, Pagination } from "@mui/material";
+import { Grid, Pagination, Typography } from "@mui/material";
 import { hideLoader, showLoader } from "../store/loaderReducer";
 import { useEffect, useState } from "react";
 
@@ -56,15 +56,35 @@ const Cart: React.FC = () => {
     }
   };
 
+  const saveCartProduct = (cartProduct: CartModel) => {
+    const index = cartProductList.items.findIndex(
+      (x) => x._id === cartProduct._id
+    );
+    cartProductList.items[index] = cartProduct;
+    setCartProductList((prev) => ({
+      ...prev,
+    }));
+  };
+
   return (
     <Grid container padding={4}>
-      <Grid container spacing={3}>
-        {cartProductList.items.map((product) => (
-          <Grid key={product._id} item xs={3}>
-            <CartProduct cartProduct={product} />
-          </Grid>
-        ))}
-      </Grid>
+      {cartProductList.items.length ? (
+        <Grid container spacing={3}>
+          {cartProductList.items.map((product) => (
+            <Grid key={product._id} item xs={2}>
+              <CartProduct
+                cartProduct={product}
+                saveCartProduct={saveCartProduct}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Grid container padding={4} justifyContent="center">
+          No data available
+        </Grid>
+      )}
+
       <Grid container justifyContent="center" padding={1}>
         <Pagination
           page={pageNumber}

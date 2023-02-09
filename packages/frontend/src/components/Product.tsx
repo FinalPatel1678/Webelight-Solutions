@@ -37,6 +37,14 @@ const Product: React.FC<Props> = ({ product }) => {
         purchased: false,
         product: product._id as string,
       });
+
+      dispatch(
+        showNotification({
+          message: "Product has been added to cart successfully",
+          type: "success",
+        })
+      );
+      navigate(RoutePaths.cart);
     } catch (error) {
       if (Shared.isApiError(error)) {
         dispatch(
@@ -48,13 +56,6 @@ const Product: React.FC<Props> = ({ product }) => {
       }
     } finally {
       dispatch(hideLoader());
-      dispatch(
-        showNotification({
-          message: "Product has been added to cart successfully",
-          type: "success",
-        })
-      );
-      navigate(RoutePaths.cart);
     }
   };
 
@@ -63,8 +64,8 @@ const Product: React.FC<Props> = ({ product }) => {
       <Card>
         <CardMedia component="img" height="180" image={product.productImage} />
         <CardContent>
-          <Typography variant="body2" color="text.primary">
-            Name: {product.productName}
+          <Typography variant="h6" color="text.primary">
+            {product.productName}
           </Typography>
           <Typography variant="body2" color="text.primary">
             Category: {product.category}

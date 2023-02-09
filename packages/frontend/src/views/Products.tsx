@@ -15,26 +15,28 @@ import FilterParams from "../models/Filter";
 import { PagedResult } from "../models/PagedResult";
 import Product from "../components/Product";
 import { ProductModel } from "../models/ProductModel";
+import { RoutePaths } from "../util/enum";
 import Shared from "../util/shared";
 import { showNotification } from "../store/notificationReducer";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useProductService } from "../services/prduct.service";
 
 const minDistance = 10;
+const initialFilterParam = new FilterParams();
 
 const Products: React.FC = () => {
   const productService = useProductService();
-
+  const navigate = useNavigate();
   const [productList, setProductList] = useState<PagedResult<ProductModel[]>>({
     count: 0,
     items: [],
   });
-  const [filterParam, setFilterParam] = useState<FilterParams>(
-    new FilterParams()
-  );
-  const [dataFilterParam, setDataFilterParam] = useState<FilterParams>(
-    new FilterParams()
-  );
+  const [filterParam, setFilterParam] =
+    useState<FilterParams>(initialFilterParam);
+
+  const [dataFilterParam, setDataFilterParam] =
+    useState<FilterParams>(initialFilterParam);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -106,8 +108,8 @@ const Products: React.FC = () => {
   };
 
   const clearFilter = () => {
-    setDataFilterParam(new FilterParams());
-    setFilterParam(new FilterParams());
+    setDataFilterParam(initialFilterParam);
+    setFilterParam(initialFilterParam);
   };
 
   return (
@@ -154,17 +156,32 @@ const Products: React.FC = () => {
                 clear
               </Button>
             </Box>
+            <Box p={1} px={4}>
+              <Button
+                color="info"
+                onClick={() => navigate(RoutePaths.cart)}
+                variant="contained"
+              >
+                Go to Cart
+              </Button>
+            </Box>
           </Box>
         </Grid>
       </Grid>
 
-      <Grid container spacing={3}>
-        {productList.items.map((product) => (
-          <Grid key={product._id} item xs={3}>
-            <Product product={product} />
-          </Grid>
-        ))}
-      </Grid>
+      {productList.items.length ? (
+        <Grid container spacing={3}>
+          {productList.items.map((product) => (
+            <Grid key={product._id} item xs={2}>
+              <Product product={product} />
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Grid container padding={4} justifyContent="center">
+          No data available
+        </Grid>
+      )}
       <Grid container justifyContent="center" padding={1}>
         <Pagination
           page={dataFilterParam.pageNumber}
