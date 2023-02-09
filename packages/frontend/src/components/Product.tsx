@@ -7,11 +7,17 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { hideLoader, showLoader } from "../store/loaderReducer";
 
 import AddToCartIcon from "@mui/icons-material/AddShoppingCart";
+import { AppDispatch } from "../store";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ProductModel } from "../models/ProductModel";
 import { RoutePaths } from "../util/enum";
+import Shared from "../util/shared";
+import { showNotification } from "../store/notificationReducer";
+import { useCardProductService } from "../services/cart.service";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -20,20 +26,42 @@ interface Props {
 
 const Product: React.FC<Props> = ({ product }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const cartProductService = useCardProductService();
 
-  const onClickCart = () => {
-    navigate(RoutePaths.cart);
+  const onClickCart = async () => {
+    dispatch(showLoader("medium"));
+    try {
+      await cartProductService.upsertCartProduct({
+        quantity: 1,
+        purchased: false,
+        product: product._id as string,
+      });
+    } catch (error) {
+      if (Shared.isApiError(error)) {
+        dispatch(
+          showNotification({
+            message: error.error,
+            type: "error",
+          })
+        );
+      }
+    } finally {
+      dispatch(hideLoader());
+      dispatch(
+        showNotification({
+          message: "Product has been added to cart successfully",
+          type: "success",
+        })
+      );
+      navigate(RoutePaths.cart);
+    }
   };
 
   return (
     <Grid item xs={12} className="root">
       <Card>
-        <CardMedia
-          component="img"
-          height="300"
-          width="350"
-          image={product.productImage}
-        />
+        <CardMedia component="img" height="180" image={product.productImage} />
         <CardContent>
           <Typography variant="body2" color="text.primary">
             Name: {product.productName}

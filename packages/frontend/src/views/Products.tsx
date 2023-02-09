@@ -130,7 +130,7 @@ const Products: React.FC = () => {
             onChange={onChangeCategory}
             value={filterParam.category}
           >
-            <MenuItem value="">Default</MenuItem>
+            <MenuItem value="">All</MenuItem>
             {Shared.getCategories().map((option) => (
               <MenuItem key={option} value={option}>
                 {option}

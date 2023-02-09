@@ -21,8 +21,8 @@ const productSchema = new mongoose.Schema<IProduct>({
   productName: {
     type: String,
     required: true,
-    minlength: 6,
-    maxlength: 12,
+    minLength: 6,
+    maxLength: 12,
   },
   favorite: {
     type: Boolean,

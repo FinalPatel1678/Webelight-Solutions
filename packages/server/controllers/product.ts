@@ -27,6 +27,7 @@ export const getProducts = async (req: Request, res: Response) => {
 
     res.status(200).send(result);
   } catch (err) {
+    console.log(err);
     res.status(500).send("Error while getting list of products");
   }
 };

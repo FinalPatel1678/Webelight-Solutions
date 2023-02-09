@@ -1,3 +1,4 @@
+import cart from "./routes/cart";
 import cors from "cors";
 import express from "express";
 import product from "./routes/product";
@@ -13,5 +14,6 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.use("/api/product", product);
+app.use("/api/cart", cart);
 
 export default app;
