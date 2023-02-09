@@ -1,10 +1,8 @@
 import { IProductRequest, Product } from "../models/product";
 
 import { PagedResult } from "../models/pagedResult";
-import mongoose from "mongoose";
 
 export interface IProductService {
-  upsertProduct: (productRequest: IProductRequest) => Promise<IProductRequest>;
   getProducts: (
     page: number,
     query: Record<string, unknown>
@@ -29,18 +27,7 @@ export const getProductService = (): IProductService => {
     };
   };
 
-  const upsertProduct = async (productRequest: IProductRequest) =>
-    await Product.findByIdAndUpdate(
-      productRequest._id ? productRequest._id : new mongoose.Types.ObjectId(),
-      productRequest,
-      {
-        upsert: true,
-        new: true,
-      }
-    ).lean();
-
   return {
     getProducts,
-    upsertProduct,
   };
 };

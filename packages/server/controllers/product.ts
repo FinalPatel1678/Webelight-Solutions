@@ -31,16 +31,3 @@ export const getProducts = async (req: Request, res: Response) => {
     res.status(500).send("Error while getting list of products");
   }
 };
-
-export const upsertProduct = async (req: Request, res: Response) => {
-  try {
-    const productService: IProductService = getProductService();
-
-    const result = await productService.upsertProduct(req.body);
-
-    return res.status(200).send(result);
-  } catch (err: any) {
-    console.log(err);
-    return res.status(500).send("Error while upsert product");
-  }
-};
