@@ -1,3 +1,5 @@
+// import { IProductRequest, Product } from "../models/product";
+
 import mongoose from "mongoose";
 
 const connectDatabase = () => {
@@ -10,6 +12,18 @@ const connectDatabase = () => {
     .connect(process.env.MONGO_URI)
     .then(async (db) => {
       console.log("Mongoose Connected");
+
+      // const data: IProductRequest[] = [];
+      // for (let t = 30; t < 45; t++) {
+      //   data.push({
+      //     category: "categoryC",
+      //     favorite: false,
+      //     price: Math.random() * 100,
+      //     productImage: "/logo192.png",
+      //     productName: "Product" + " " + t + 1,
+      //   });
+      // }
+      // Product.insertMany(data);
     })
     .catch((error) => {
       console.log(error);

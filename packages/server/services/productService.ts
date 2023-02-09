@@ -7,14 +7,14 @@ export interface IProductService {
   upsertProduct: (productRequest: IProductRequest) => Promise<IProductRequest>;
   getProducts: (
     page: number,
-    query: { favorite?: boolean }
+    query: Record<string, unknown>
   ) => Promise<PagedResult<IProductRequest[]>>;
 }
 
 export const getProductService = (): IProductService => {
   const getProducts = async (
     page: number,
-    query: { favorite?: boolean }
+    query: Record<string, unknown>
   ): Promise<PagedResult<IProductRequest[]>> => {
     const items = await Product.find(query)
       .skip(10 * (page - 1))

@@ -1,4 +1,5 @@
 import BaseService from "./base.service";
+import FilterParams from "../models/Filter";
 import { PagedResult } from "../models/PagedResult";
 import { ProductModel } from "../models/ProductModel";
 
@@ -8,17 +9,10 @@ export function useProductService() {
 }
 
 export default class ProductServices extends BaseService {
-  getList = async (page: number, filter?: { favorite: boolean }) =>
+  getList = async (filterParam: FilterParams) =>
     await this.callApi<PagedResult<ProductModel[]>>(
       "GET",
       "/product",
-      new URLSearchParams(
-        filter?.favorite
-          ? {
-              page: page.toString(),
-              favorite: "true",
-            }
-          : { page: page.toString() }
-      )
+      new URLSearchParams(Object.entries(filterParam))
     );
 }

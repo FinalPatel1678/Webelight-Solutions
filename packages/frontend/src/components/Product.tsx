@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ProductModel } from "../models/ProductModel";
 
 interface Props {
@@ -17,18 +18,27 @@ interface Props {
 const Product: React.FC<Props> = ({ product }) => {
   return (
     <Grid item xs={12} className="root">
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia component="img" height="300" image="/logo192.png" />
+      <Card>
+        <CardMedia
+          component="img"
+          height="300"
+          width="350"
+          image={product.productImage}
+        />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+          <Typography variant="body2" color="text.primary">
+            Name: {product.productName}
+          </Typography>
+          <Typography variant="body2" color="text.primary">
+            Category: {product.category}
+          </Typography>
+          <Typography variant="body2" color="text.primary">
+            Price: {Math.ceil(product.price)} $
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
+        <CardActions>
           <IconButton aria-label="add to favorites">
-            {/* <FavoriteIcon /> */}
+            <FavoriteIcon color={product.favorite ? "error" : "disabled"} />
           </IconButton>
         </CardActions>
       </Card>

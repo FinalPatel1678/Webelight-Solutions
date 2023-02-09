@@ -8,4 +8,6 @@ export default class Shared {
   public static isApiError = (error: any): error is ApiError => {
     return typeof error.error === "string" && error.isApiError === true;
   };
+
+  public static getCategories = () => ["categoryA", "categoryB", "categoryC"];
 }
