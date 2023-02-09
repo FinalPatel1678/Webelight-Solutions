@@ -8,14 +8,23 @@ import {
   Typography,
 } from "@mui/material";
 
+import AddToCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ProductModel } from "../models/ProductModel";
+import { RoutePaths } from "../util/enum";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   product: ProductModel;
 }
 
 const Product: React.FC<Props> = ({ product }) => {
+  const navigate = useNavigate();
+
+  const onClickCart = () => {
+    navigate(RoutePaths.cart);
+  };
+
   return (
     <Grid item xs={12} className="root">
       <Card>
@@ -38,7 +47,11 @@ const Product: React.FC<Props> = ({ product }) => {
         </CardContent>
         <CardActions>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon color={product.favorite ? "error" : "disabled"} />
+            <FavoriteIcon />
+          </IconButton>
+
+          <IconButton aria-label="add to cart" onClick={onClickCart}>
+            <AddToCartIcon />
           </IconButton>
         </CardActions>
       </Card>
